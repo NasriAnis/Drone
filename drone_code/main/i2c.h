@@ -3,8 +3,8 @@
 
 #define I2C_TIMEOUT_MS  100
 
-#define I2C_SDA_IO 36
-#define I2C_SCL_IO 35
+#define I2C_SDA_IO 9
+#define I2C_SCL_IO 8
 
 typedef struct {
 	i2c_master_bus_handle_t bus;
