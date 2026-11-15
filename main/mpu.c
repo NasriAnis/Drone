@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <memory.h>
 #include "driver/i2c_master.h"
 #include "driver/i2c_types.h"
 #include "freertos/FreeRTOS.h"
@@ -12,8 +13,29 @@ Cords cords;
 Cords cords_error;
 
 void print_cords(){
-	printf("A: %6d %6d %6d | G: %6d %6d %6d\n", \
-		cords.ax, cords.ay, cords.az, cords.gx, cords.gy, cords.gz);
+	printf("A: %.2f %.2f %.2f | G: %.1f %.1f %.1f\n",
+       cords.ax, cords.ay, cords.az,
+       cords.gx, cords.gy, cords.gz);
+}
+
+static void mpu_calibrate(void){
+    memset(&cords_error, 0, sizeof(cords_error));
+    Cords sum = {0};
+    const int N = 200;
+
+    for (int i = 0; i < N; i++) {
+        mpu_read_cords(&cords);
+        sum.ax += cords.ax;  sum.ay += cords.ay;  sum.az += cords.az;
+        sum.gx += cords.gx;  sum.gy += cords.gy;  sum.gz += cords.gz;
+        vTaskDelay(pdMS_TO_TICKS(5));
+    }
+
+    cords_error.ax = sum.ax / N;
+    cords_error.ay = sum.ay / N;
+    cords_error.az = sum.az / N - 1.0f;   // keep gravity: Z should read 1 g when flat
+    cords_error.gx = sum.gx / N;
+    cords_error.gy = sum.gy / N;
+    cords_error.gz = sum.gz / N;
 }
 
 Cords *mpu_init(){
@@ -21,7 +43,7 @@ Cords *mpu_init(){
 	vTaskDelay(pdMS_TO_TICKS(100));
 	ESP_ERROR_CHECK(reg_write(i2c_state.mpu, MPU_PWR_MGMT_1, 0x00));   // wake up
 	vTaskDelay(pdMS_TO_TICKS(10));
-	mpu_read_cords(&cords_error);
+	mpu_calibrate();
 	return &cords;
 }
 
@@ -29,12 +51,12 @@ void mpu_read_cords(Cords *cords){
 	uint8_t raw[14];
 	esp_err_t err = reg_read(i2c_state.mpu, MPU_ACCEL_XOUT, raw, sizeof(raw));
 	if (err == ESP_OK) {
-		cords->ax = ( (raw[0]  << 8) | raw[1] ) - cords_error.ax;
-		cords->ay = ( (raw[2]  << 8) | raw[3] ) - cords_error.ay;
-		cords->az = ( (raw[4]  << 8) | raw[5] ) - cords_error.az;
-		cords->gx = ( (raw[8]  << 8) | raw[9] ) - cords_error.gx;
-		cords->gy = ( (raw[10] << 8) | raw[11]) - cords_error.gy;
-		cords->gz = ( (raw[12] << 8) | raw[13]) - cords_error.gz;
+		cords->ax = (int16_t)((raw[0]  << 8) | raw[1])  / ACCEL_SCALE - cords_error.ax;
+		cords->ay = (int16_t)((raw[2]  << 8) | raw[3])  / ACCEL_SCALE - cords_error.ay;
+		cords->az = (int16_t)((raw[4]  << 8) | raw[5])  / ACCEL_SCALE - cords_error.az;
+		cords->gx = (int16_t)((raw[8]  << 8) | raw[9])  / GYRO_SCALE  - cords_error.gx;
+		cords->gy = (int16_t)((raw[10] << 8) | raw[11]) / GYRO_SCALE  - cords_error.gy;
+		cords->gz = (int16_t)((raw[12] << 8) | raw[13]) / GYRO_SCALE  - cords_error.gz;
 	} else {
 		printf("read failed: %s\n", esp_err_to_name(err));
 	}
