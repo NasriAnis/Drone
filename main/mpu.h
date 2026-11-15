@@ -14,7 +14,8 @@ typedef struct {
 	int16_t gz;
 } Cords;
 extern Cords cords;
+extern Cords cords_error;
 
 void print_cords();
-void mpu_init();
-void mpu_read_cords();
+Cords *mpu_init();
+void mpu_read_cords(Cords *cords);
