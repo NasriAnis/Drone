@@ -492,7 +492,7 @@
     "pinned_symbol_libs": []
   },
   "meta": {
-    "filename": "drone_schematic.kicad_pro",
+    "filename": "drone.kicad_pro",
     "version": 3
   },
   "net_settings": {
@@ -672,8 +672,8 @@
     "subpart_id_separator": 0,
     "top_level_sheets": [
       {
-        "filename": "drone_schematic.kicad_sch",
-        "name": "Root",
+        "filename": "drone.kicad_sch",
+        "name": "drone",
         "uuid": "bdef35a8-a53d-41d7-ba25-e3c85533535a"
       }
     ],
@@ -683,7 +683,7 @@
   "sheets": [
     [
       "bdef35a8-a53d-41d7-ba25-e3c85533535a",
-      "Root"
+      "drone"
     ]
   ],
   "text_variables": {},
