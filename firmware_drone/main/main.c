@@ -4,6 +4,7 @@
 
 #include "mpu.h"
 #include "i2c.h"
+#include "motors.h"
 
 void app_main(void)
 {
@@ -11,11 +12,10 @@ void app_main(void)
 
 	i2c_init();
 	Cords *cords = mpu_init();
+	motors_init();
 
 	while (1) {
 		mpu_read_cords(cords);
 		print_cords();
-
-		vTaskDelay(pdMS_TO_TICKS(1000));
 	}
 }
