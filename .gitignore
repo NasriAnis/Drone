@@ -3,3 +3,4 @@ build/
 .history/
 sdkconfig
 compile_commands.json
+*.FCBak
