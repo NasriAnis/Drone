@@ -1,0 +1,1 @@
+void write_reading(int up, int down, int left, int right, int forward, int rear);
