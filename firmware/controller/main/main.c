@@ -7,6 +7,7 @@ void app_main(void)
 {
 	comunication_init(cont);
 	while (1) {
+		// test reading
 		write_reading(1, 2, 3, 4, 5, 6);
 		controler_send_readings();
 	}
