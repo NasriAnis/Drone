@@ -17,7 +17,7 @@ void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t status
 	printf("%s", ss);
 }
 
-void print_recv(){
+void print_controler_data(){
 	printf("up: %d | down: %d | right: %d | left: %d | forward: %d | rear: %d\n",
 		controler_readings.up, controler_readings.down, controler_readings.right, controler_readings.left, controler_readings.forward, controler_readings.rear);
 }
@@ -25,7 +25,7 @@ void print_recv(){
 void OnDataRecv(const esp_now_recv_info_t *recv_info, const uint8_t *data, int len) {
 	memcpy(&controler_readings, data, sizeof(controler_readings));
 	printf("Received %i from controller : \n", len);
-	print_recv();
+	print_controler_data();
 }
 
 void comunication_init(enum device dev){
