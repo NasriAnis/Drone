@@ -4,3 +4,5 @@ build/
 sdkconfig
 compile_commands.json
 *.FCBak
+fp-lib-table
+*.dsn
