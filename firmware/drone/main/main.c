@@ -5,13 +5,13 @@
 #include "motors.h"
 #include "comunication.h"
 
-enum device dr = drone;
+enum device DRONE = drone;
 
 void app_main(void)
 {
 	printf("ESP32-S3 Drone Controler\n");
 
-	comunication_init(dr);
+	comunication_init(DRONE);
 	i2c_init();
 	Cords *cords = mpu_init();
 	motors_init();
