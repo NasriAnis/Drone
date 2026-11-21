@@ -18,7 +18,10 @@ void app_main(void)
 
 	while (1) {
 		mpu_read_cords(cords);
-		print_cords();
-		print_controler_data();
+
+		// logs
+		// print_cords();
+		// print_controler_data();
+
 	}
 }
