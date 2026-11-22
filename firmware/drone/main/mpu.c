@@ -9,6 +9,7 @@
 
 #include "mpu.h"
 #include "i2c.h"
+#include "settings.h"
 
 static const char *TAG = "drone";
 

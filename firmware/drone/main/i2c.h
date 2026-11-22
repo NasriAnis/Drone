@@ -1,10 +1,6 @@
 #include "stdint.h"
 #include "driver/i2c_master.h"
 
-#define I2C_TIMEOUT_MS  100
-
-#define I2C_SDA_IO 8
-#define I2C_SCL_IO 9
 
 typedef struct {
 	i2c_master_bus_handle_t bus;

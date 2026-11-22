@@ -1,6 +1,3 @@
-#define WIFI_MODE WIFI_MODE_STA
-#define WIFI_IF WIFI_IF_STA
-
 enum device {
 	drone, controler
 };

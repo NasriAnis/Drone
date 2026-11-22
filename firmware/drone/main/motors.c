@@ -1,5 +1,6 @@
 #include "motors.h"
 #include "ledc.h"
+#include "settings.h"
 
 static const int motor_pins[NUM_MOTORS] = {MOTOR1, MOTOR2, MOTOR3, MOTOR4};
 static const ledc_channel_t motor_ch[NUM_MOTORS] = {

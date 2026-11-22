@@ -7,6 +7,7 @@
 #include "esp_log.h"
 
 #include "include/comunication.h"
+#include "settings.h"
 
 Message controler_readings;
 

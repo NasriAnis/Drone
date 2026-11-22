@@ -2,6 +2,7 @@
 #include "hal/ledc_types.h"
 
 #include "ledc.h"
+#include "settings.h"
 
 ledc_timer_config_t ledc_init_timer(){
 	ledc_timer_config_t ledc_timer = {

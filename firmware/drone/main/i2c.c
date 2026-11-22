@@ -1,6 +1,7 @@
 #include "driver/i2c_master.h"
 
 #include "i2c.h"
+#include "settings.h"
 
 I2CState i2c_state;
 

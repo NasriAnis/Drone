@@ -1,6 +1,7 @@
 #include "comunication.h"
 #include "adc.h"
 #include "joystick.h"
+#include "settings.h"
 
 joystick_at_rest joys_at_rest;
 
