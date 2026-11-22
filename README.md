@@ -25,10 +25,28 @@ Drone/
 
 ## Requirements
 
-- An ESP32 dev board for the drone and one for the controller
-- A USB cable that carries data (not charge-only)
+Software:
 - Linux or macOS (Windows works too, but the commands below are for a Unix shell)
 - ESP-IDF v5.x
+
+Hardware:
+- An ESP32 dev board for the drone and one for the controller
+- A USB cable that carries data (not charge-only)
+- 4 Motors
+- 4 Mosfets
+- 4 joysticks
+- MPU
+- Battery
+
+What i used:
+- ESP32 C3 pro mini for the drone
+- ESP32 S3 for the controller
+- 8520 Motors x4
+- 55mm propelers x4
+- AO3400 Mosfets x4
+- 6500 MPU x1
+- Joysticks x2
+- Battery
 
 ## 1. ESP-IDF framework and env setup
 
