@@ -3,5 +3,5 @@
 #include "include/delay.h"
 
 void delay(int delay_ms){
-	vTaskDelay(pdMS_TO_TICKS(delay));
+    vTaskDelay(pdMS_TO_TICKS(delay_ms));
 }
