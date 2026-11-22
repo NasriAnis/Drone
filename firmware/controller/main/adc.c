@@ -17,7 +17,7 @@ void init_adc_unit(adc_unit_t unit){
 
 void adc_config_chanel(adc_channel_t chan){
     adc_oneshot_chan_cfg_t chan_config = {
-        .atten = ADC_ATTEN_DB_0,
+        .atten = ADC_ATTEN_DB_12,
         .bitwidth = ADC_BITWIDTH_DEFAULT,
     };
     adc_oneshot_config_channel(adc_info.adc_handle, chan, &chan_config);
