@@ -58,9 +58,10 @@ void comunication_init(enum device dev){
 	esp_wifi_start();
 
 	// init esp now
-	if (esp_now_init() != ESP_OK){
-		printf("[x] Failed to init ESP-NOW");
+	while (esp_now_init() != ESP_OK){
+		printf("[x] Failed to init ESP-NOW... Retry");
 	};
+	printf("[s] Sucess init ESP-NOW");
 
 	esp_now_register_send_cb(OnDataSent);
 
@@ -69,9 +70,10 @@ void comunication_init(enum device dev){
 	peer_info.channel = 0;
 	peer_info.encrypt = 0;
 
-	if (esp_now_add_peer(&peer_info) != ESP_OK){
-		printf("[x] Failed to add peer");
+	while (esp_now_add_peer(&peer_info) != ESP_OK){
+		printf("[x] Failed to add peer... Retry");
 	};
+	printf("[s] Sucess added peer");
 
 	esp_now_register_recv_cb(OnDataRecv);
 }
