@@ -4,10 +4,13 @@
 #include <stdint.h>
 #include <memory.h>
 #include <stdio.h>
+#include "esp_log.h"
 
 #include "include/comunication.h"
 
 Message controler_readings;
+
+static const char *TAG = "controller";
 
 static uint8_t DRONE_MAC[]      = {0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
 static uint8_t CONTROLLER_MAC[] = {0xDA, 0xAD, 0xBE, 0xEF, 0xFE, 0xED};
@@ -17,9 +20,15 @@ void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t status
 	printf("%s", ss);
 }
 
-void print_controler_data(){
-	printf("up: %d | down: %d | right: %d | left: %d | forward: %d | rear: %d\n",
-		controler_readings.up, controler_readings.down, controler_readings.right, controler_readings.left, controler_readings.forward, controler_readings.rear);
+void print_controller_data(void){
+    ESP_LOGI(TAG, "+---------+--------+");
+    ESP_LOGI(TAG, "| Up      | %5d  |", controler_readings.up);
+    ESP_LOGI(TAG, "| Down    | %5d  |", controler_readings.down);
+    ESP_LOGI(TAG, "| Left    | %5d  |", controler_readings.left);
+    ESP_LOGI(TAG, "| Right   | %5d  |", controler_readings.right);
+    ESP_LOGI(TAG, "| Forward | %5d  |", controler_readings.forward);
+    ESP_LOGI(TAG, "| Rear    | %5d  |", controler_readings.rear);
+    ESP_LOGI(TAG, "+---------+--------+");
 }
 
 void OnDataRecv(const esp_now_recv_info_t *recv_info, const uint8_t *data, int len) {

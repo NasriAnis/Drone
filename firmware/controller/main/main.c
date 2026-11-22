@@ -7,8 +7,11 @@ void app_main(void)
 {
 	comunication_init(CONTROLER);
 	while (1) {
-		// test reading
-		write_reading(1, 2, 3, 4, 5, 6);
+		joystick_read();
+
+		// logs
+		// print_controler_data();
+
 		controler_send_readings();
 	}
 }

@@ -5,17 +5,23 @@
 #include "driver/i2c_types.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "esp_log.h"
 
 #include "mpu.h"
 #include "i2c.h"
 
+static const char *TAG = "drone";
+
 Cords cords;
 Cords cords_error;
 
-void print_cords(){
-	printf("A: %.2f %.2f %.2f | G: %.1f %.1f %.1f\n",
-       cords.ax, cords.ay, cords.az,
-       cords.gx, cords.gy, cords.gz);
+void print_cords(void){
+    ESP_LOGI(TAG, "+------+----------+----------+----------+");
+    ESP_LOGI(TAG, "|      |    X     |    Y     |    Z     |");
+    ESP_LOGI(TAG, "+------+----------+----------+----------+");
+    ESP_LOGI(TAG, "| Acc  | %8.2f | %8.2f | %8.2f |", cords.ax, cords.ay, cords.az);
+    ESP_LOGI(TAG, "| Gyro | %8.1f | %8.1f | %8.1f |", cords.gx, cords.gy, cords.gz);
+    ESP_LOGI(TAG, "+------+----------+----------+----------+");
 }
 
 static void mpu_calibrate(void){
