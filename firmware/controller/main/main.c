@@ -6,6 +6,8 @@ enum device CONTROLER = controler;
 void app_main(void)
 {
 	comunication_init(CONTROLER);
+	init_joystick();
+
 	while (1) {
 		joystick_read();
 

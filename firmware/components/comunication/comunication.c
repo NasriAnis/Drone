@@ -21,14 +21,12 @@ void OnDataSent(const esp_now_send_info_t *tx_info, esp_now_send_status_t status
 }
 
 void print_controller_data(void){
-    ESP_LOGI(TAG, "+---------+--------+");
-    ESP_LOGI(TAG, "| Up      | %5d  |", controler_readings.up);
-    ESP_LOGI(TAG, "| Down    | %5d  |", controler_readings.down);
-    ESP_LOGI(TAG, "| Left    | %5d  |", controler_readings.left);
-    ESP_LOGI(TAG, "| Right   | %5d  |", controler_readings.right);
-    ESP_LOGI(TAG, "| Forward | %5d  |", controler_readings.forward);
-    ESP_LOGI(TAG, "| Rear    | %5d  |", controler_readings.rear);
-    ESP_LOGI(TAG, "+---------+--------+");
+    ESP_LOGI(TAG, "+-----------+--------+");
+    ESP_LOGI(TAG, "| Up        | %5d  |", controler_readings.up_down);
+    ESP_LOGI(TAG, "| Rotate    | %5d  |", controler_readings.rotate);
+    ESP_LOGI(TAG, "| R/Left    | %5d  |", controler_readings.left_right);
+    ESP_LOGI(TAG, "| R/Forward | %5d  |", controler_readings.forward_rear);
+    ESP_LOGI(TAG, "+-----------+--------+");
 }
 
 void OnDataRecv(const esp_now_recv_info_t *recv_info, const uint8_t *data, int len) {
