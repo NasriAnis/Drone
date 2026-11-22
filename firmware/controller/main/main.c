@@ -10,7 +10,7 @@ void app_main(void)
 		joystick_read();
 
 		// logs
-		// print_controler_data();
+		// print_controller_data();
 
 		controler_send_readings();
 	}

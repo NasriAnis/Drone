@@ -34,7 +34,7 @@ void print_controller_data(void){
 void OnDataRecv(const esp_now_recv_info_t *recv_info, const uint8_t *data, int len) {
 	memcpy(&controler_readings, data, sizeof(controler_readings));
 	printf("Received %i from controller : \n", len);
-	print_controler_data();
+	print_controller_data();
 }
 
 void comunication_init(enum device dev){

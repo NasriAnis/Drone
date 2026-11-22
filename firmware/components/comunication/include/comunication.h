@@ -12,4 +12,4 @@ extern Message controler_readings;
 
 void comunication_init(enum device dev);
 void controler_send_readings();
-void print_controler_data();
+void print_controller_data();

@@ -21,7 +21,7 @@ void app_main(void)
 
 		// logs
 		// print_cords();
-		// print_controler_data();
+		// print_controller_data();
 
 	}
 }
