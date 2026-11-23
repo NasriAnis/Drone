@@ -7,6 +7,9 @@ The project is split in two firmware images, both built with ESP-IDF:
 - `firmware/drone`: runs on the drone (IMU, PID stabilisation, motor PWM)
 - `firmware/controller`: runs on the handheld remote (joystick via ADC)
 
+> [!WARNING]
+> **Testing phase.** This project is under active development. Expect bugs and breaking changes, and **always test with the propellers removed** until you trust the flight controller.
+
 ## Repository layout
 
 ```
