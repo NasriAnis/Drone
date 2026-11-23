@@ -1,15 +1,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <memory.h>
-#include "driver/i2c_master.h"
-#include "driver/i2c_types.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "esp_log.h"
 
 #include "mpu.h"
 #include "i2c.h"
 #include "settings.h"
+#include "delay.h"
 
 static const char *TAG = "drone";
 
@@ -34,7 +31,7 @@ static void mpu_calibrate(void){
         mpu_read_cords(&cords);
         sum.ax += cords.ax;  sum.ay += cords.ay;  sum.az += cords.az;
         sum.gx += cords.gx;  sum.gy += cords.gy;  sum.gz += cords.gz;
-        vTaskDelay(pdMS_TO_TICKS(5));
+        delay(5);
     }
 
     cords_error.ax = sum.ax / N;
@@ -47,9 +44,9 @@ static void mpu_calibrate(void){
 
 Cords *mpu_init(){
 	i2c_state.mpu = i2c_add_device(MPU_ADDR, i2c_state.bus);
-	vTaskDelay(pdMS_TO_TICKS(100));
+	delay(100);
 	ESP_ERROR_CHECK(reg_write(i2c_state.mpu, MPU_PWR_MGMT_1, 0x00));   // wake up
-	vTaskDelay(pdMS_TO_TICKS(10));
+	delay(10);
 	mpu_calibrate();
 	return &cords;
 }
