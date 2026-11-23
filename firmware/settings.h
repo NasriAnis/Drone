@@ -62,6 +62,18 @@
 
 #define THROTTLE_RATE               0.5f
 
+#define ROLL_KP    0.02f
+#define ROLL_KI    0.0f
+#define ROLL_KD    0.0f
+
+#define PITCH_KP   0.02f
+#define PITCH_KI   0.0f
+#define PITCH_KD   0.0f
+
+#define YAW_KP     0.005f
+#define YAW_KI     0.0f
+#define YAW_KD     0.0f
+
 /* ========================================================================== */
 /*                          COMMUNICATION SETTINGS                            */
 /* ========================================================================== */

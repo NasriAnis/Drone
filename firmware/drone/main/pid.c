@@ -17,9 +17,9 @@ typedef struct {
     float integral;
 } pid_ctrl_t;
 
-static pid_ctrl_t pid_roll  = { .kp = 0.02f,  .ki = 0.0f, .kd = 0.0f };
-static pid_ctrl_t pid_pitch = { .kp = 0.02f,  .ki = 0.0f, .kd = 0.0f };
-static pid_ctrl_t pid_yaw   = { .kp = 0.005f, .ki = 0.0f, .kd = 0.0f };
+static pid_ctrl_t pid_roll  = { .kp = ROLL_KP,  .ki = ROLL_KI,  .kd = ROLL_KD  };
+static pid_ctrl_t pid_pitch = { .kp = PITCH_KP, .ki = PITCH_KI, .kd = PITCH_KD };
+static pid_ctrl_t pid_yaw   = { .kp = YAW_KP,   .ki = YAW_KI,   .kd = YAW_KD   };
 
 static float roll, pitch;        // filtered angles (deg)
 static float throttle = 0;       // 0..1, kept between calls
@@ -30,7 +30,7 @@ static float pid_update(pid_ctrl_t *p, float setpoint, float measure, float rate
     float error = setpoint - measure;
 
     p->integral += p->ki * error * dt;
-    if (p->integral >  0.1f) p->integral =  0.1f;     // anti-windup
+    if (p->integral >  0.1f) p->integral =  0.1f;
     if (p->integral < -0.1f) p->integral = -0.1f;
 
     return p->kp * error + p->integral - p->kd * rate;
