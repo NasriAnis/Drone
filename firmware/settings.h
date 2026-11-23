@@ -19,11 +19,16 @@
 /* ========================================================================== */
 
 /* ---- Motors -------------------------------------------------------------- */
-#define NUM_MOTORS                  4
-#define MOTOR1                      4
-#define MOTOR2                      0
-#define MOTOR3                      5
-#define MOTOR4                      10
+#define NUM_MOTORS                 4
+#define MOTOR1_RL_GPIO             4
+#define MOTOR2_FL_GPIO             0
+#define MOTOR3_FR_GPIO             5
+#define MOTOR4_RR_GPIO             10
+
+#define MOTOR1_RL_NUM              0
+#define MOTOR2_FL_NUM              1
+#define MOTOR3_FR_NUM              2
+#define MOTOR4_RR_NUM              3
 
 /* ---- MPU ----------------------------------------------------------------- */
 #define MPU_ADDR                    0x68
@@ -34,14 +39,28 @@
 
 /* ---- LEDC (PWM) ---------------------------------------------------------- */
 #define LEDC_FREQ_HZ                20000
-#define TIMER                       LEDC_TIMER_0
-#define PWM_MAX_DUTY                ((1 << 10) - 1)
+#define LEDC_TIMER                  LEDC_TIMER_0
+#define LEDC_CLOCK_CFG              LEDC_USE_APB_CLK
+#define LEDC_SPEED_MODE             LEDC_LOW_SPEED_MODE
+
+#define LEDC_DUTY_RESOLUTION        LEDC_TIMER_10_BIT
+#define LEDC_PWN_MAX_DUTY           ((1 << 10) - 1)
+
+#define LEDC_START                  0
 
 /* ---- I2C ----------------------------------------------------------------- */
 #define I2C_TIMEOUT_MS              100
 #define I2C_SDA_IO                  8
 #define I2C_SCL_IO                  9
 
+/* ---- PID ----------------------------------------------------------------- */
+#define GYRO_TRUST                  0.98f
+#define ACCE_TRUST                  0.02f
+
+#define MAX_ANGLE_DEG               25.0f
+#define MAX_YAW_DPS                 120.0f
+
+#define THROTTLE_RATE               0.5f
 
 /* ========================================================================== */
 /*                          COMMUNICATION SETTINGS                            */

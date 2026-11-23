@@ -1,6 +1,8 @@
 #include <stdint.h>
 #include "driver/i2c_master.h"
 
+// Data is in ±2g for acceleration
+// and ±250 °/s for gyro
 typedef struct {
 	float ax;
 	float ay;

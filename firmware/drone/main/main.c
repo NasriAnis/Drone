@@ -4,6 +4,7 @@
 #include "i2c.h"
 #include "motors.h"
 #include "comunication.h"
+#include "pid.h"
 
 enum device DRONE = drone;
 
@@ -13,15 +14,14 @@ void app_main(void)
 
 	comunication_init(DRONE);
 	i2c_init();
-	Cords *cords = mpu_init();
+	mpu_init();
 	motors_init();
 
 	while (1) {
-		mpu_read_cords(cords);
+		pid_correct();
 
 		// logs
 		// print_cords();
 		// print_controller_data();
-
 	}
 }

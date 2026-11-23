@@ -2,6 +2,7 @@
 #include "adc.h"
 #include "joystick.h"
 #include "settings.h"
+#include "delay.h"
 
 joystick_at_rest joys_at_rest;
 
@@ -13,7 +14,10 @@ void write_reading(int up_down, int rotate, int left_right, int forward_rear){
 }
 
 int calc_joy_pecentage(int read_value, int max_value){
-	return (read_value * 100) / max_value;
+	if (max_value == 0){
+		return 0;
+	}
+	return read_value / max_value;
 }
 
 void joystick_read(){
@@ -39,6 +43,15 @@ void joystick_read(){
 		joys_at_rest.right_left
 	);
 
+	if (ud > 100)   ud  = 100;
+	if (ud < -100)  ud  = -100;
+	if (rot > 100)  rot = 100;
+	if (rot < -100) rot = -100;
+	if (fr > 100)   fr  = 100;
+	if (fr < -100)  fr  = -100;
+	if (lr > 100)   lr  = 100;
+	if (lr < -100)  lr  = -100;
+
 	write_reading(ud, rot, lr, fr);
 }
 
@@ -51,9 +64,11 @@ void joystick_calibrate(){
 
 void init_joystick(){
 	init_adc_unit(JOYSTICK_ADC);
+	delay(10);
 	adc_config_chanel(JOYSTICK1_UP_DOWN_CH);
 	adc_config_chanel(JOYSTICK1_ROTATE_CH);
 	adc_config_chanel(JOYSTICK2_ADV_REAR_CH);
 	adc_config_chanel(JOYSTICK2_RIGHT_LEFT_CH);
+	delay(10);
 	joystick_calibrate();
 }
